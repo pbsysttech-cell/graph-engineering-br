@@ -51,7 +51,7 @@
       var ir = img.naturalWidth / img.naturalHeight, br = box.width / box.height;
       var bw, bh, ox, oy;
       if (ir > br) { bh = box.height; bw = bh * ir; ox = (box.width - bw) * 0.5; oy = 0; }
-      else { bw = box.width; bh = bw / ir; ox = 0; oy = (box.height - bh) * 0.2; }
+      else { bw = box.width; bh = bw / ir; ox = 0; oy = (box.height - bh) * ((parseFloat((getComputedStyle(img).objectPosition || "50% 20%").split(" ")[1]) || 20) / 100); }
       var tw = box.width / COLS, th = box.height / ROWS;
       var frag = document.createDocumentFragment(), list = [];
       for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
