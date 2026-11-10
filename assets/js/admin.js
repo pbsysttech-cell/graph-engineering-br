@@ -26,8 +26,8 @@
   function digits(p) { var d = String(p || "").replace(/\D/g, ""); return d.length <= 11 ? "55" + d : d; }
   function waLink(l) {
     var first = (l.name || "").split(" ")[0];
-    var msg = l.interest === "parceria"
-      ? "Oi " + first + ", aqui é o Mateus. Vi seu pedido de consultoria para a sua agência. Me conta quantos clientes vocês atendem hoje e onde está o maior gargalo?"
+    var msg = l.interest === "consultoria" || l.interest === "parceria"
+      ? "Oi " + first + ", aqui é o Mateus. Vi seu pedido de consultoria" + (l.company ? " para a " + l.company : "") + ". Me conta: hoje, onde as vendas mais travam, no volume de contatos ou no fechamento?"
       : l.interest === "mentoria"
       ? "Oi " + first + ", aqui é o Mateus. Vi sua aplicação para a Mentoria Stark e queria entender melhor sua operação. Tem 15 minutos hoje?"
       : "Oi " + first + ", aqui é o Mateus, da Hollmind. Recebi seu pedido de diagnóstico" + (l.company ? " da " + l.company : "") + ". Posso te fazer umas perguntas rápidas por aqui?";

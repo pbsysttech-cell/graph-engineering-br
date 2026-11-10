@@ -233,7 +233,7 @@
     });
   });
   function applyInterest() {
-    var v = (form.querySelector('input[name="interest"]:checked') || {}).value || "consultoria";
+    var v = (form.querySelector('input[name="interest"]:checked') || {}).value || "gestao";
     $$("[data-l-" + v + "]", form).forEach(function (el) { el.textContent = el.getAttribute("data-l-" + v); });
   }
   $$('input[name="interest"]', form).forEach(function (r) { r.addEventListener("change", applyInterest); });
@@ -318,7 +318,7 @@
       company: (fd.get("company") || "").trim() || null,
       segment: (fd.get("segment") || "").trim() || null,
       city: (fd.get("city") || "").trim() || null,
-      interest: fd.get("interest") || "consultoria",
+      interest: fd.get("interest") || "gestao",
       revenue: fd.get("revenue"), ads_invest: fd.get("ads_invest"),
       team: fd.get("team"), crm: fd.get("crm"),
       challenge: fd.getAll("challenge"),

@@ -249,9 +249,12 @@ input.invalid{border-color:var(--no);box-shadow:0 0 0 4px rgba(201,132,118,.14)}
 .seg{display:grid;gap:8px}
 .seg label,.opts label{position:relative;cursor:pointer}
 .seg input,.opts input{position:absolute;opacity:0;pointer-events:none}
-.seg span,.opts span{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 14px;border-radius:12px;background:var(--bg);box-shadow:0 0 0 1px var(--line-2) inset;font-size:15px;transition:box-shadow .2s,background .2s,transform .15s var(--ease-out)}
+.seg label>span,.opts label>span{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 14px;border-radius:12px;background:var(--bg);box-shadow:0 0 0 1px var(--line-2) inset;font-size:15px;transition:box-shadow .2s,background .2s,transform .15s var(--ease-out)}
 .seg span .ic{color:var(--accent-2)}
-.seg label:active span,.opts label:active span{transform:scale(.98)}
+.seg .opt-t{display:grid;gap:3px;line-height:1.35}
+.seg .opt-t b{font-weight:600}
+.seg .opt-t small{font-size:13.5px;color:var(--mute)}
+.seg label:active>span,.opts label:active>span{transform:scale(.98)}
 .seg input:checked+span,.opts input:checked+span{background:rgba(212,147,95,.12);box-shadow:0 0 0 1.5px var(--accent) inset}
 .seg input:focus-visible+span,.opts input:focus-visible+span{outline:2px solid var(--accent-2);outline-offset:2px}
 .opts{display:grid;gap:8px}

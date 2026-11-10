@@ -19,7 +19,7 @@ create table if not exists public.leads (
   team         text check (team is null or char_length(team) <= 20),
   crm          text check (crm is null or char_length(crm) <= 20),
   challenge    text[] default '{}',
-  interest     text not null default 'consultoria' check (interest in ('consultoria','parceria','mentoria')),
+  interest     text not null default 'gestao' check (interest in ('gestao','consultoria','parceria','mentoria')),
   message      text check (message is null or char_length(message) <= 1000),
   consent      boolean not null default false,
   status       text not null default 'novo'
@@ -30,9 +30,9 @@ create table if not exists public.leads (
   referrer     text, page text, device text
 );
 
--- Se a tabela já existia antes da opção 'parceria':
+-- Se a tabela já existia antes das opções atuais do formulário:
 alter table public.leads drop constraint if exists leads_interest_check;
-alter table public.leads add constraint leads_interest_check check (interest in ('consultoria','parceria','mentoria'));
+alter table public.leads add constraint leads_interest_check check (interest in ('gestao','consultoria','parceria','mentoria'));
 
 create index if not exists leads_created_at_idx on public.leads (created_at desc);
 create index if not exists leads_status_idx on public.leads (status);

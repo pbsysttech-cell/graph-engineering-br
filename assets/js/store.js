@@ -45,9 +45,10 @@
       ["escalar", "Quero escalar com margem"]
     ],
     interest: [
-      ["consultoria", "Consultoria Hollmind"],
-      ["parceria", "Consultoria para agência"],
-      ["mentoria", "Mentoria Stark"]
+      ["gestao", "Marketing e comercial (Hollmind)"],
+      ["consultoria", "Consultoria"],
+      ["mentoria", "Mentoria Stark"],
+      ["parceria", "Consultoria para agência"]   // opção antiga, mantida para leads já recebidos
     ],
     status: [
       ["novo", "Novo"],
@@ -201,7 +202,7 @@
       var all = lsGet();
       names.forEach(function (n, i) {
         var d = new Date(Date.now() - Math.floor(Math.random() * 28) * 864e5 - Math.floor(Math.random() * 8e7));
-        var interest = i % 4 === 0 ? "mentoria" : "consultoria";
+        var interest = ["gestao", "gestao", "consultoria", "mentoria"][i % 4];
         var status = pick(st);
         all.push({
           id: uuid(), created_at: d.toISOString(), updated_at: d.toISOString(),
