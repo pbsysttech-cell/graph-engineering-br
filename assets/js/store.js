@@ -194,7 +194,7 @@
       if (REMOTE) return;
       var names = ["Carla Mendes", "Rafael Souza", "Juliana Prado", "Marcos Vieira", "Patrícia Lima", "Diego Rocha", "Fernanda Alves", "Thiago Nunes", "Aline Castro", "Bruno Teixeira", "Larissa Gomes", "Eduardo Pires"];
       var seg = ["Concessionária", "Clínica", "Academia", "Imobiliária", "Odontologia", "Agência de tráfego", "Loja de móveis", "Escola"];
-      var cities = ["Porto Velho/RO", "Ji-Paraná/RO", "Manaus/AM", "Rio Branco/AC", "Cuiabá/MT", "Belém/PA"];
+      var cities = ["São Paulo/SP", "Goiânia/GO", "Manaus/AM", "Curitiba/PR", "Cuiabá/MT", "Belém/PA"];
       var st = ["novo", "novo", "contato", "reuniao", "proposta", "ganho", "perdido"];
       var src = ["instagram", "instagram", "google", "facebook", "direto"];
       var pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
@@ -205,7 +205,7 @@
         var status = pick(st);
         all.push({
           id: uuid(), created_at: d.toISOString(), updated_at: d.toISOString(),
-          name: n, whatsapp: "(69) 9" + (8000 + i * 37) + "-" + (1000 + i * 91),
+          name: n, whatsapp: "(11) 9" + (8000 + i * 37) + "-" + (1000 + i * 91),
           email: n.split(" ")[0].toLowerCase() + "@empresa.com.br",
           company: pick(seg) + " " + n.split(" ")[1], segment: pick(seg), city: pick(cities),
           revenue: pick(OPTIONS.revenue)[0], ads_invest: pick(OPTIONS.adsInvest)[0],

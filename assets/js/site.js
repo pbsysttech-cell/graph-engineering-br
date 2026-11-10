@@ -102,6 +102,7 @@
   function onScroll() {
     var y = window.scrollY;
     topbar.classList.toggle("is-solid", y > 40);
+    document.body.classList.toggle("scrolled", y > window.innerHeight * 0.5);
     fab.classList.toggle("is-on", y > window.innerHeight * 0.9 && !applyVisible);
     flowProgress();
   }

@@ -49,11 +49,14 @@ p{margin:0}
 /* ---------- topbar: pílula com avatar, nome e botão juntos ---------- */
 .topbar{position:fixed;z-index:50;left:50%;top:calc(10px + env(safe-area-inset-top));transform:translateX(-50%);
   width:min(calc(100% - 24px),440px);display:flex;justify-content:space-between;align-items:center;gap:12px;
-  padding:5px 5px 5px 6px;border-radius:999px;background:rgba(18,13,10,.55);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);
-  box-shadow:0 0 0 1px var(--line-2) inset,0 10px 30px -12px rgba(0,0,0,.6);transition:background .3s}
-.topbar.is-solid{background:rgba(18,13,10,.85)}
+  padding:5px 0;background:transparent}
+/* sem caixa: só um degradê do fundo da página quando há texto passando por baixo */
+.top-fade{position:fixed;inset:0 0 auto 0;height:calc(84px + env(safe-area-inset-top));z-index:49;pointer-events:none;
+  background:linear-gradient(var(--bg) 0%,rgba(18,13,10,.92) 55%,rgba(18,13,10,0) 100%);opacity:0;transition:opacity .35s}
+.scrolled .top-fade{opacity:1}
+.brand span{text-shadow:0 1px 8px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.7)}
 .brand{display:flex;align-items:center;gap:10px;font:600 15px var(--f-display);letter-spacing:-.01em;min-width:0}
-.brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1.5px var(--accent)}
+.brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1.5px var(--accent),0 4px 14px rgba(0,0,0,.6)}
 .brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .topbar .btn-sm{border-radius:999px;min-height:38px;padding:0 16px}
 
