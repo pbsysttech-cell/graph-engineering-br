@@ -26,7 +26,9 @@
   function digits(p) { var d = String(p || "").replace(/\D/g, ""); return d.length <= 11 ? "55" + d : d; }
   function waLink(l) {
     var first = (l.name || "").split(" ")[0];
-    var msg = l.interest === "mentoria"
+    var msg = l.interest === "parceria"
+      ? "Oi " + first + ", aqui é o Mateus. Vi que você tem uma agência e quer apoio no tráfego pago dos seus clientes. Me conta quantos clientes vocês atendem hoje?"
+      : l.interest === "mentoria"
       ? "Oi " + first + ", aqui é o Mateus. Vi sua aplicação para a Mentoria Stark e queria entender melhor sua operação. Tem 15 minutos hoje?"
       : "Oi " + first + ", aqui é o Mateus, da Hollmind. Recebi seu pedido de diagnóstico" + (l.company ? " da " + l.company : "") + ". Posso te fazer umas perguntas rápidas por aqui?";
     return "https://wa.me/" + digits(l.whatsapp) + "?text=" + encodeURIComponent(msg);

@@ -28,6 +28,10 @@
 
     function textIn(delay) {
       document.body.classList.remove("is-loading");
+      setTimeout(function () {
+        var an = $(".annots"); if (an) an.classList.add("on");
+        $$(".hero mark.hl").forEach(function (m, i) { setTimeout(function () { m.classList.add("on"); }, i * 500); });
+      }, reduce ? 0 : delay + 700);
       if (reduce) return;
       words.forEach(function (w, i) {
         w.animate([{ transform: "translateY(105%)" }, { transform: "translateY(0)" }],
@@ -137,7 +141,11 @@
       });
     }, { threshold: 0.18, rootMargin: "0px 0px -6% 0px" });
     $$(".reveal").forEach(function (el) { io.observe(el); });
-    $$(".stats [data-count]").forEach(function (el) { io.observe(el); });
+    $$(".hero-text [data-count]").forEach(function (el) { io.observe(el); });
+    var hlIo = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("on"); hlIo.unobserve(e.target); } });
+    }, { threshold: 0.8 });
+    $$("mark.hl").forEach(function (m) { if (!m.closest(".hero")) hlIo.observe(m); });
   } else {
     $$(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
@@ -175,15 +183,23 @@
   }
   document.addEventListener("visibilitychange", function () { if (document.hidden) runSquares(false); });
 
-  /* ---------------- linha do fluxo acompanha a rolagem ---------------- */
-  var flow = $("#flow"), fsteps = $$(".fstep");
+  /* ---------------- fluxo: título fixo, etapa atual pelo centro da tela ---------------- */
+  var flow = $("#flow"), fsteps = $$(".fstep"), sNum = $("#storyNum"), sBar = $("#storyBar"), lastCur = -1;
   function flowProgress() {
     if (!flow) return;
-    var r = flow.getBoundingClientRect(), vh = window.innerHeight;
-    var p = Math.max(0, Math.min(1, (vh * 0.75 - r.top) / (r.height + vh * 0.2)));
-    if (window.innerWidth >= 760) p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (vh * 0.5)));
+    var mid = window.innerHeight * 0.55, cur = -1;
+    fsteps.forEach(function (st, i) { if (st.getBoundingClientRect().top < mid) cur = i; });
+    var r = flow.getBoundingClientRect();
+    var p = Math.max(0, Math.min(1, (mid - r.top - 28) / Math.max(1, r.height - 68)));
     flow.style.setProperty("--p", p.toFixed(3));
-    fsteps.forEach(function (s, i) { s.classList.toggle("on", p >= i / (fsteps.length - 1) - 0.02); });
+    fsteps.forEach(function (st, i) { st.classList.toggle("on", i <= cur); st.classList.toggle("cur", i === cur); });
+    var shown = Math.max(0, cur);
+    if (shown !== lastCur) {
+      lastCur = shown;
+      sNum.textContent = ("0" + (shown + 1)).slice(-2);
+      sBar.style.width = ((shown + 1) / fsteps.length * 100) + "%";
+      if (!reduce) sNum.animate([{ transform: "translateY(40%)", opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 350, easing: EASE });
+    }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", flowProgress);
