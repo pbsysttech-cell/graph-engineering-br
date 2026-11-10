@@ -62,7 +62,10 @@ p{margin:0}
 
 /* ---------- hero ---------- */
 .hero{position:relative;width:100%;margin:0 auto}
-.hero-photo{position:relative;width:100%;height:min(125vw,82svh);min-height:420px;overflow:hidden;background:#2a1612}
+.hero{padding-top:calc(54px + env(safe-area-inset-top))}
+/* fundo infinito: recorte sobre a cor da página, com uma luz quente atrás para separar a camisa preta */
+.hero-photo{position:relative;width:100%;height:min(125vw,82svh);min-height:420px;overflow:hidden;
+  background:radial-gradient(55% 48% at 56% 40%,rgba(212,147,95,.26),rgba(212,147,95,.08) 55%,transparent 75%)}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .hero-photo .tiles{position:absolute;inset:0;display:grid;pointer-events:none}
 .tile{background-repeat:no-repeat;will-change:transform,opacity}
@@ -100,18 +103,18 @@ mark.hl.on{background-size:100% 100%}
 .annots.on .annot svg path{stroke-dashoffset:0}
 .annots.on .a2{transition-delay:.35s}.annots.on .a2 svg path{transition-delay:.6s}
 .annots.on .a3{transition-delay:.7s}.annots.on .a3 svg path{transition-delay:.95s}
-.a1{left:4%;top:13%;--r:-6deg}
-.a1 svg{left:.6em;top:.9em}
-.a2{right:3%;top:47%;--r:3deg;text-align:right;line-height:.95}
-.a2 svg{left:-2.5em;top:.2em}
-.a3{right:5%;top:63%;--r:-3deg}
-.a3 svg{left:-2.6em;top:-.1em}
+.a1{left:4%;top:7%;--r:-6deg}
+.a1 svg{left:4.3em;top:.1em}
+.a2{right:2%;top:17%;--r:3deg;text-align:right;line-height:.95}
+.a2 svg{left:-2.5em;top:.4em}
+.a3{left:3%;top:26%;--r:-4deg}
+.a3 svg{left:5em;top:.1em}
 
 /* ---------- hub de links ---------- */
 .hub{padding-top:44px;display:grid;gap:14px}
 .card{position:relative;display:block;border-radius:var(--r);background:var(--card);box-shadow:0 0 0 1px var(--line) inset;overflow:hidden;transition:transform .25s var(--ease-out),box-shadow .25s}
 @media (hover:hover){.card:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-2) inset,0 20px 40px -24px rgba(0,0,0,.8)}}
-.card-media{position:relative;aspect-ratio:16/10;overflow:hidden}
+.card-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:radial-gradient(50% 70% at 50% 45%,rgba(212,147,95,.24),transparent 75%)}
 .card-media img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform .8s var(--ease-out)}
 @media (hover:hover){.card:hover .card-media img{transform:scale(1.04)}}
 .card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,23,18,0) 40%,var(--card) 100%)}
@@ -299,7 +302,7 @@ input.invalid{border-color:var(--no);box-shadow:0 0 0 4px rgba(201,132,118,.14)}
 /* a partir de 700px (tablet, celular deitado, visualizadores que abrem em largura de desktop): foto ao lado */
 @media (min-width:700px){
   .hero{max-width:1080px;display:grid;grid-template-columns:1fr minmax(280px,44%);gap:clamp(24px,4vw,40px);align-items:end;padding:88px 24px 0}
-  .hero-photo{order:2;border-radius:28px;height:auto;min-height:0;aspect-ratio:4/5;box-shadow:0 0 0 1px var(--line-2)}
+  .hero-photo{order:2;height:auto;min-height:0;aspect-ratio:4/5}
   .hero-fade{height:30%}
   .hero-copy{margin:0;max-width:none;padding:0 0 32px}
   .hero-name{font-size:clamp(36px,4.2vw,54px)}
