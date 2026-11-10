@@ -27,7 +27,7 @@
   function waLink(l) {
     var first = (l.name || "").split(" ")[0];
     var msg = l.interest === "parceria"
-      ? "Oi " + first + ", aqui é o Mateus. Vi que você tem uma agência e quer apoio no tráfego pago dos seus clientes. Me conta quantos clientes vocês atendem hoje?"
+      ? "Oi " + first + ", aqui é o Mateus. Vi seu pedido de consultoria para a sua agência. Me conta quantos clientes vocês atendem hoje e onde está o maior gargalo?"
       : l.interest === "mentoria"
       ? "Oi " + first + ", aqui é o Mateus. Vi sua aplicação para a Mentoria Stark e queria entender melhor sua operação. Tem 15 minutos hoje?"
       : "Oi " + first + ", aqui é o Mateus, da Hollmind. Recebi seu pedido de diagnóstico" + (l.company ? " da " + l.company : "") + ". Posso te fazer umas perguntas rápidas por aqui?";

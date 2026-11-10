@@ -46,7 +46,7 @@
     ],
     interest: [
       ["consultoria", "Consultoria Hollmind"],
-      ["parceria", "Tráfego para agência"],
+      ["parceria", "Consultoria para agência"],
       ["mentoria", "Mentoria Stark"]
     ],
     status: [
