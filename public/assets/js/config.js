@@ -1,11 +1,14 @@
 /*
- * Configuração da página. Edite só este arquivo.
+ * Configuração da página. Edite só este arquivo (e api/config.php no servidor).
  *
- * SUPABASE: sem url/anonKey o site roda em MODO DEMONSTRAÇÃO — os leads ficam
- * salvos apenas no navegador de quem preencheu e NÃO aparecem no painel do Mateus.
- * Para produção, crie o projeto no Supabase, rode supabase/schema.sql e preencha abaixo.
+ * Onde os leads ficam salvos, em ordem de prioridade:
+ *  1) api      -> PHP + MySQL da própria Hostinger (padrão). Configure api/config.php.
+ *  2) supabase -> só se "api" estiver vazio e url/anonKey preenchidos.
+ *  3) nenhum   -> MODO DEMONSTRAÇÃO: leads ficam só no navegador de quem preencheu.
  */
 window.SITE_CONFIG = {
+  api: "/api",
+
   supabase: {
     url: "",      // ex.: "https://xxxx.supabase.co"
     anonKey: ""   // chave "anon public" do projeto (é pública por design; a segurança vem do RLS)
@@ -21,6 +24,6 @@ window.SITE_CONFIG = {
     stark: "#aplicar"                           // link da página da Mentoria Stark, se existir
   },
 
-  // Senha do painel APENAS no modo demonstração (sem Supabase). Não é segurança real.
+  // Senha do painel APENAS no modo demonstração (sem PHP nem Supabase). Não é segurança real.
   demoPanelPassword: "stark2026"
 };

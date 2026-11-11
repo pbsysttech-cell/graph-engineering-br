@@ -41,6 +41,11 @@
     $("#modeBadge").classList.toggle("live", S.remote);
     $("#demoNote").hidden = S.remote;
     if (!S.remote) { $("#emailField").hidden = true; $("#loginHint").textContent = "Modo demonstração: senha definida em config.js."; }
+    if (S.mode === "php") {
+      $("#emailField span").textContent = "Usuário";
+      $("#emailField input").type = "text";
+      $("#loginHint").textContent = "Entre com o usuário e a senha definidos em api/config.php.";
+    }
     if (S.isLogged()) showApp(); else showLogin();
   }
   function showLogin() { $("#login").hidden = false; $("#app").hidden = true; }

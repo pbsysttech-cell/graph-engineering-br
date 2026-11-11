@@ -223,5 +223,44 @@
     }
   };
 
+  /* ---------- modo PHP + MySQL (Hostinger): tem prioridade quando SITE_CONFIG.api está preenchido ---------- */
+  var API = (window.SITE_CONFIG && window.SITE_CONFIG.api) || "";
+  if (API) {
+    API = API.replace(/\/$/, "");
+    var call = function (path, opts) {
+      opts = opts || {};
+      return fetch(API + path, {
+        method: opts.method || "GET",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json", "X-Requested-With": "fetch" },
+        body: opts.body ? JSON.stringify(opts.body) : undefined
+      }).then(function (r) {
+        return r.text().then(function (t) {
+          var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
+          if (r.status === 401 && path.indexOf("auth.php") < 0) { setSession(null); throw new Error("401"); }
+          if (!r.ok) throw new Error((j && j.error) || ("Erro " + r.status));
+          return j;
+        });
+      });
+    };
+    Store.remote = true;
+    Store.mode = "php";
+    Store.createLead = function (lead) { return call("/leads.php", { method: "POST", body: lead }); };
+    Store.login = function (user, password) {
+      return call("/auth.php", { method: "POST", body: { action: "login", user: user, password: password } })
+        .then(function () { setSession({ php: true, email: user }); });
+    };
+    Store.logout = function () { call("/auth.php", { method: "POST", body: { action: "logout" } }).catch(function () {}); setSession(null); };
+    Store.listLeads = function () { return call("/leads.php"); };
+    Store.updateLead = function (id, patch) {
+      var p = {};
+      ["status", "value", "notes"].forEach(function (k) { if (k in patch) p[k] = patch[k]; });
+      return call("/leads.php?id=" + encodeURIComponent(id), { method: "PATCH", body: p });
+    };
+    Store.deleteLead = function (id) { return call("/leads.php?id=" + encodeURIComponent(id), { method: "DELETE" }); };
+  } else {
+    Store.mode = REMOTE ? "supabase" : "demo";
+  }
+
   window.Store = Store;
 })();
