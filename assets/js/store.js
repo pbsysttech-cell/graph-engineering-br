@@ -45,7 +45,7 @@
       ["escalar", "Quero escalar com margem"]
     ],
     interest: [
-      ["gestao", "Marketing e comercial (Hollmind)"],
+      ["gestao", "Contrate meus serviços"],
       ["consultoria", "Consultoria"],
       ["mentoria", "Mentoria Stark"],
       ["parceria", "Consultoria para agência"]   // opção antiga, mantida para leads já recebidos
