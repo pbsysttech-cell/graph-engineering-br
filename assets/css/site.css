@@ -194,10 +194,11 @@ mark.hl.on{background-size:100% 100%}
 /* fluxo: título fixo e etapas descendo */
 .story{padding-bottom:40px}
 .story-grid{display:grid;gap:8px;align-items:start}
-.story-head{position:sticky;top:calc(64px + env(safe-area-inset-top));z-index:5;padding:14px 0 16px;background:linear-gradient(var(--bg) 82%,rgba(18,13,10,0))}
+/* no celular o texto é longo demais para ficar fixo: o título rola junto e as etapas animam abaixo */
+.story-head{position:relative;padding:14px 0 16px}
 .story-head h2{font-size:clamp(30px,7vw,52px);font-weight:800}
-.story-sub{display:none;margin-top:14px;max-width:34ch}
-.story-meter{display:flex;align-items:baseline;gap:6px;margin-top:12px;font-family:var(--f-mono)}
+.story-sub{margin-top:14px;max-width:44ch}
+.story-meter{display:none;align-items:baseline;gap:6px;margin-top:18px;font-family:var(--f-mono)}
 .story-meter b{font:800 26px/1 var(--f-display);color:var(--accent-2);min-width:1.4em}
 .story-meter span{color:var(--dim);font-size:13px}
 .story-meter i{flex:1;height:3px;margin-left:10px;border-radius:3px;background:var(--line);overflow:hidden;align-self:center}
@@ -322,7 +323,8 @@ input.invalid{border-color:var(--no);box-shadow:0 0 0 4px rgba(201,132,118,.14)}
 @media (min-width:760px){
   .story-grid{grid-template-columns:minmax(260px,.9fr) 1.1fr;gap:56px}
   .story-head{top:120px;padding:0;background:none}
-  .story-sub{display:block}
+  .story-head{position:sticky;top:120px}
+  .story-meter{display:flex}
   .fstep{min-height:46svh;align-items:center}
 
   .cases{grid-template-columns:repeat(2,1fr)}
