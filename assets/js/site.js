@@ -151,38 +151,27 @@
     $$(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
 
-  /* ---------------- quadrados com frases ---------------- */
-  var squares = $$(".sq");
-  squares.forEach(function (sq) {
-    var words = sq.getAttribute("data-words").split("|");
-    var slot = $(".sq-word", sq);
-    sq._words = words; sq._i = 0;
-    var w = document.createElement("span"); w.className = "w"; w.textContent = words[0];
-    slot.appendChild(w);
-  });
-  function swap(sq) {
-    var slot = $(".sq-word", sq), old = $(".w", slot);
-    sq._i = (sq._i + 1) % sq._words.length;
-    var nw = document.createElement("span"); nw.className = "w"; nw.textContent = sq._words[sq._i];
-    slot.appendChild(nw);
-    sq.classList.add("is-live");
-    setTimeout(function () { sq.classList.remove("is-live"); }, 900);
-    if (reduce) { old.remove(); return; }
-    old.animate([{ transform: "none", opacity: 1, filter: "blur(0)" }, { transform: "translateY(-60%)", opacity: 0, filter: "blur(4px)" }],
-      { duration: 450, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" }).onfinish = function () { old.remove(); };
-    nw.animate([{ transform: "translateY(60%)", opacity: 0, filter: "blur(4px)" }, { transform: "none", opacity: 1, filter: "blur(0)" }],
-      { duration: 600, delay: 120, easing: EASE, fill: "both" });
-  }
-  var sqTimer = null, sqTick = 0;
-  function runSquares(on) {
-    clearInterval(sqTimer);
+  /* ---------------- etapas em seta: o destaque percorre Diagnosticar -> Evoluir ---------------- */
+  var chev = $("#chev"), chevItems = $$(".chev-i"), chevTimer = null, chevI = chevItems.length - 1, chevVisible = false;
+  function chevShow(i) { chevItems.forEach(function (el, k) { el.classList.toggle("is-on", k === i); }); }
+  function chevRun(on) {
+    clearInterval(chevTimer);
     if (!on || reduce) return;
-    sqTimer = setInterval(function () { swap(squares[sqTick % squares.length]); sqTick++; }, 1100);
+    chevTimer = setInterval(function () {
+      chevI = (chevI + 1) % chevItems.length;
+      chevShow(chevI);
+      // pausa maior no "Evoluir" antes de recomeçar
+      if (chevI === chevItems.length - 1) { clearInterval(chevTimer); setTimeout(function () { if (chevVisible) chevRun(true); }, 2200); }
+    }, 1100);
   }
-  if ("IntersectionObserver" in window && squares.length) {
-    new IntersectionObserver(function (e) { runSquares(e[0].isIntersecting); }, { threshold: 0.2 }).observe($("#squares"));
-  }
-  document.addEventListener("visibilitychange", function () { if (document.hidden) runSquares(false); });
+  if (chev && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (e) {
+      chevVisible = e[0].isIntersecting;
+      if (chevVisible) chev.classList.add("in");
+      chevRun(chevVisible);
+    }, { threshold: 0.3 }).observe(chev);
+  } else if (chev) chev.classList.add("in");
+  document.addEventListener("visibilitychange", function () { if (document.hidden) chevRun(false); else if (chevVisible) chevRun(true); });
 
   /* ---------------- fluxo: título fixo, etapa atual pelo centro da tela ---------------- */
   var flow = $("#flow"), fsteps = $$(".fstep"), sNum = $("#storyNum"), sBar = $("#storyBar"), lastCur = -1;

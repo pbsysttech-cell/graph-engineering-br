@@ -150,21 +150,34 @@ mark.hl.on{background-size:100% 100%}
 .sec-head{max-width:640px;margin-bottom:28px}
 .sec-head h2{font-size:clamp(30px,6.4vw,48px);font-weight:800}
 
-/* quadrados com frases rotativas */
-.squares{display:grid;grid-template-columns:1fr;gap:12px}
-@media (min-width:520px){.squares{grid-template-columns:repeat(2,1fr)}}
-.sq{position:relative;border-radius:var(--r);padding:18px;background:var(--card);box-shadow:0 0 0 1px var(--line) inset;display:flex;flex-direction:column;gap:14px;overflow:hidden}
-.sq-title{padding-top:18px}
-@media (min-width:760px){.sq{min-height:230px}}
-.sq::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 100% 0%,rgba(212,147,95,.16),transparent 60%);opacity:0;transition:opacity .6s;pointer-events:none}
-.sq.is-live::after{opacity:1}
-.sq-top{display:flex;justify-content:space-between;align-items:center}
-.sq-top .ic{width:26px;height:26px;color:var(--accent-2)}
-.sq-label{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.sq-title{font:700 clamp(19px,4.8vw,23px)/1.15 var(--f-display);letter-spacing:-.02em;margin-top:auto}
-.sq-word{position:relative;display:block;height:1.5em;overflow:hidden;font:500 14.5px/1.5 var(--f-body);color:var(--accent-2);padding-left:16px}
-.sq-word::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
-.sq-word .w{display:block;position:absolute;left:16px;right:0;top:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* etapas em seta: Diagnosticar -> Evoluir; o destaque percorre as etapas */
+.chev{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.chev-i{position:relative;padding:36px 20px 38px;background:var(--card);color:var(--text);
+  clip-path:polygon(0 0,50% 22px,100% 0,100% calc(100% - 22px),50% 100%,0 calc(100% - 22px));
+  transition:background .5s var(--ease-out),color .5s var(--ease-out)}
+.chev-i:first-child{padding-top:20px;border-radius:16px 16px 0 0;clip-path:polygon(0 0,100% 0,100% calc(100% - 22px),50% 100%,0 calc(100% - 22px))}
+.chev-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(212,147,95,.12);color:var(--accent-2);margin-bottom:14px;transition:background .5s,color .5s}
+.chev-ic .ic{width:22px;height:22px}
+.chev-i h3{font-size:20px;font-weight:800}
+.chev-i p{margin-top:6px;color:var(--mute);font-size:15px;line-height:1.45;transition:color .5s}
+.chev-i.is-on{background:linear-gradient(135deg,var(--accent-2),var(--accent));color:var(--accent-ink)}
+.chev-i.is-on p{color:rgba(28,18,12,.78)}
+.chev-i.is-on .chev-ic{background:rgba(28,18,12,.14);color:var(--accent-ink)}
+.js .chev-i{opacity:0;transform:translateY(14px)}
+.chev.in .chev-i{opacity:1;transform:none;transition:opacity .6s var(--ease-out),transform .6s var(--ease-out),background .5s,color .5s}
+.chev.in .chev-i:nth-child(2){transition-delay:.08s,.08s,0s,0s}
+.chev.in .chev-i:nth-child(3){transition-delay:.16s,.16s,0s,0s}
+.chev.in .chev-i:nth-child(4){transition-delay:.24s,.24s,0s,0s}
+.chev.in .chev-i:nth-child(5){transition-delay:.32s,.32s,0s,0s}
+@media (min-width:760px){
+  .chev{grid-template-columns:repeat(5,1fr);gap:0}
+  .chev-i{padding:22px 34px 26px 40px;margin-left:-14px;
+    clip-path:polygon(0 0,calc(100% - 22px) 0,100% 50%,calc(100% - 22px) 100%,0 100%,22px 50%)}
+  .chev-i:first-child{margin-left:0;padding:22px 34px 26px 24px;border-radius:16px 0 0 16px;
+    clip-path:polygon(0 0,calc(100% - 22px) 0,100% 50%,calc(100% - 22px) 100%,0 100%)}
+  .chev-i h3{font-size:19px}
+  .chev-i p{font-size:14px}
+}
 
 /* resultados */
 .proof{margin-top:96px;padding:72px 0;background:linear-gradient(180deg,var(--bg-2),var(--bg));border-block:1px solid var(--line)}
@@ -295,7 +308,6 @@ input.invalid{border-color:var(--no);box-shadow:0 0 0 4px rgba(201,132,118,.14)}
   .story-sub{display:block}
   .fstep{min-height:46svh;align-items:center}
 
-  .squares{grid-template-columns:repeat(2,1fr)}
   .cases{grid-template-columns:repeat(2,1fr)}
   .fit{grid-template-columns:1fr 1fr}
   .apply-grid{grid-template-columns:.9fr 1.1fr;align-items:start}
@@ -316,7 +328,6 @@ input.invalid{border-color:var(--no);box-shadow:0 0 0 4px rgba(201,132,118,.14)}
 }
 @media (min-width:1000px){
   .hero{grid-template-columns:1fr 480px;padding:96px 16px 0}
-  .squares{grid-template-columns:repeat(4,1fr)}
   .wrap-narrow:has(.bio){max-width:760px}
 }
 
