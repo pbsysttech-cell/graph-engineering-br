@@ -35,3 +35,18 @@ Links com `?utm_source=instagram&utm_campaign=...` são gravados no lead e apare
 ## Animações
 
 Todas em CSS/Web Animations API, sem biblioteca: montagem da foto em blocos (o rosto se forma primeiro), nome subindo por máscara, borda luminosa no card principal, contadores, quadrados com frases rotativas, linha do funil que acompanha a rolagem, etapas do formulário. Quem usa "reduzir movimento" no sistema recebe tudo estático.
+
+## SEO (o que já está feito e o que falta com o domínio)
+
+Feito na página:
+- Título e descrição com as buscas principais ("gestor de tráfego pago", "consultoria de vendas") e o nome do Mateus.
+- Dados estruturados (schema.org) dizendo ao Google quem é o Mateus, que ele é cofundador da Hollmind e quais serviços oferece.
+- Um único H1 com o nome, textos alternativos nas fotos, idioma pt-BR, imagem principal pré-carregada.
+- `robots.txt` liberando o site e bloqueando o painel (`admin.html` também tem `noindex`).
+
+Falta quando o domínio existir (5 minutos):
+1. Em `index.html`, trocar `SEU-DOMINIO` e descomentar `canonical` e `og:url`.
+2. Trocar `assets/img/og.jpg` por endereço completo (`https://dominio/assets/img/og.jpg`) no `og:image` e no `image` do JSON-LD — WhatsApp e Google só leem imagem com endereço completo.
+3. Criar `sitemap.xml` com a URL da página e descomentar a linha no `robots.txt`.
+4. Cadastrar o domínio no Google Search Console e enviar o sitemap.
+5. Perfil da Empresa no Google (Hollmind) apontando para o site — é o que mais pesa para busca local.
