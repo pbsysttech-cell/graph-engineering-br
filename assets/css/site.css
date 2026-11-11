@@ -202,21 +202,38 @@ mark.hl.on{background-size:100% 100%}
 .story-meter span{color:var(--dim);font-size:13px}
 .story-meter i{flex:1;height:3px;margin-left:10px;border-radius:3px;background:var(--line);overflow:hidden;align-self:center}
 .story-meter em{display:block;height:100%;width:20%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .5s var(--ease-out)}
-.flow{list-style:none;padding:8px 0 0;margin:0;position:relative;display:grid;gap:18px}
-.flow::before{content:"";position:absolute;left:7px;top:28px;bottom:40px;width:2px;background:var(--line)}
-.flow::after{content:"";position:absolute;left:7px;top:28px;width:2px;height:calc((100% - 68px) * var(--p,0));background:linear-gradient(var(--accent-2),var(--accent))}
-.fstep{position:relative;padding-left:36px;min-height:34svh;display:flex;align-items:flex-start}
-.fdot{position:absolute;left:0;top:22px;width:16px;height:16px;border-radius:50%;background:var(--bg);box-shadow:0 0 0 2px var(--line-2) inset;transition:box-shadow .3s,background .3s}
-.fstep.on .fdot{background:var(--accent);box-shadow:0 0 0 5px rgba(212,147,95,.22)}
+.flow{list-style:none;padding:8px 0 0;margin:0;position:relative;display:grid;gap:14px}
+/* linha tracejada ligando os números; a parte cobre acompanha a rolagem */
+.flow::before{content:"";position:absolute;left:27px;top:36px;bottom:36px;width:2px;
+  background:repeating-linear-gradient(var(--line-2) 0 6px,transparent 6px 12px)}
+.flow::after{content:"";position:absolute;left:27px;top:36px;width:2px;height:calc((100% - 72px) * var(--p,0));
+  background:repeating-linear-gradient(var(--accent) 0 6px,transparent 6px 12px)}
+.fstep{position:relative;display:flex;align-items:center;gap:14px;min-height:30svh}
 .fstep:last-child{min-height:0;padding-bottom:8px}
-.fcard{position:relative;width:100%;padding:20px;border-radius:var(--r);background:var(--card);box-shadow:0 0 0 1px var(--line) inset;
-  opacity:.35;transform:translateX(10px) scale(.98);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out),box-shadow .5s}
-.fstep.on .fcard{opacity:.75;transform:none}
+.fnum{position:relative;z-index:1;flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:16px;
+  background:var(--bg-2);box-shadow:0 0 0 1px var(--line-2) inset;font:600 15px var(--f-mono);color:var(--dim);
+  transition:background .4s,color .4s,box-shadow .4s}
+.fnum .ic{width:26px;height:26px}
+.fstep.on .fnum{color:var(--accent-2);box-shadow:0 0 0 1px rgba(212,147,95,.55) inset}
+.fcard{position:relative;flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 20px;border-radius:var(--r);background:var(--card);box-shadow:0 0 0 1px var(--line) inset;
+  opacity:.4;transform:translateX(10px) scale(.98);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out),box-shadow .5s}
+.fstep.on .fcard{opacity:.8;transform:none}
 .fstep.cur .fcard{opacity:1;box-shadow:0 0 0 1px rgba(212,147,95,.5) inset,0 24px 50px -30px rgba(212,147,95,.45)}
-.fcard .ic{position:absolute;right:18px;top:18px;width:24px;height:24px;color:var(--accent-2)}
-.fn{font:500 12px var(--f-mono);color:var(--dim);letter-spacing:.1em}
-.fcard h3{font-size:24px;font-weight:700;margin:4px 0 6px}
-.fcard p{color:var(--mute);font-size:15.5px;max-width:42ch}
+.fcard h3{font-size:21px;font-weight:800}
+.fcard p{margin-top:4px;color:var(--mute);font-size:15px}
+.ftag{flex:none;font:600 11.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+/* último: crescimento estruturado em destaque cobre */
+.fstep-end .fnum{background:linear-gradient(135deg,var(--accent-2),var(--accent));color:var(--accent-ink);box-shadow:none}
+.fstep-end.on .fnum{color:var(--accent-ink);box-shadow:0 0 0 5px rgba(212,147,95,.2)}
+.fstep-end .fcard{background:linear-gradient(135deg,var(--accent-2),var(--accent));box-shadow:none}
+.fstep-end .fcard h3{color:var(--accent-ink)}
+.fstep-end .fcard p{color:rgba(28,18,12,.75)}
+.fspark{flex:none;width:64px;height:28px;fill:none;stroke:var(--accent-ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.fspark circle{fill:var(--accent-ink);stroke:none}
+.fspark path{stroke-dasharray:80;stroke-dashoffset:80;transition:stroke-dashoffset 1s var(--ease-out) .2s}
+.fstep-end.on .fspark path{stroke-dashoffset:0}
+@media (max-width:420px){.fcard{flex-direction:column;align-items:flex-start;gap:8px}.fstep-end .fspark{align-self:flex-end;margin-top:-34px}}
 
 /* para quem é */
 .fit{display:grid;gap:12px}

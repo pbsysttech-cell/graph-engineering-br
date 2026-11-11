@@ -180,7 +180,7 @@
     var mid = window.innerHeight * 0.55, cur = -1;
     fsteps.forEach(function (st, i) { if (st.getBoundingClientRect().top < mid) cur = i; });
     var r = flow.getBoundingClientRect();
-    var p = Math.max(0, Math.min(1, (mid - r.top - 28) / Math.max(1, r.height - 68)));
+    var p = Math.max(0, Math.min(1, (mid - r.top - 36) / Math.max(1, r.height - 72)));
     flow.style.setProperty("--p", p.toFixed(3));
     fsteps.forEach(function (st, i) { st.classList.toggle("on", i <= cur); st.classList.toggle("cur", i === cur); });
     var shown = Math.max(0, cur);
