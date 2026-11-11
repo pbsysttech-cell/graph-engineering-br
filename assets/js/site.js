@@ -15,7 +15,7 @@
     else { a.href = "#aplicar"; a.removeAttribute("target"); }
   });
   var ig = $("#lnkInstagram");
-  if (C.links && C.links.instagram) ig.href = C.links.instagram;
+  if (ig && C.links && C.links.instagram) ig.href = C.links.instagram;
   if (C.links && C.links.stark && C.links.stark.charAt(0) !== "#") {
     var st = $("#starkCta"); st.href = C.links.stark; st.target = "_blank"; st.rel = "noopener"; st.removeAttribute("data-interest");
   }
